@@ -14,31 +14,19 @@
   %=========
   % 中文信息
   %=========
-  ctitle={清华大学学位论文 \LaTeX\ 模板\\使用示例文档 v\version},
-  cdegree={工学硕士},
+  ctitle={基于描述的自动耦合实验实现与验证},
+  cdegree={工学学士},
   cdepartment={计算机科学与技术系},
   cmajor={计算机科学与技术},
-  cauthor={薛瑞尼},
-  csupervisor={郑纬民教授},
-  cassosupervisor={陈文光教授}, % 副指导老师
-  ccosupervisor={某某某教授}, % 联合指导老师
+  cauthor={何琦},
+  csupervisor={黄震春副研究员},
   % 日期自动使用当前时间，若需指定按如下方式修改：
   % cdate={超新星纪元},
-  %
-  % 博士后专有部分
-  catalognumber     = {分类号},  % 可以留空
-  udc               = {UDC},  % 可以留空
-  id                = {编号},  % 可以留空： id={},
-  cfirstdiscipline  = {计算机科学与技术},  % 流动站（一级学科）名称
-  cseconddiscipline = {系统结构},  % 专 业（二级学科）名称
-  postdoctordate    = {2009 年 7 月——2011 年 7 月},  % 工作完成日期
-  postdocstartdate  = {2009 年 7 月 1 日},  % 研究工作起始时间
-  postdocenddate    = {2011 年 7 月 1 日},  % 研究工作期满时间
   %
   %=========
   % 英文信息
   %=========
-  etitle={An Introduction to \LaTeX{} Thesis Template of Tsinghua University v\version},
+  etitle={Implementation and verification of Automatic Coupling for Earth System Models based on Description Language},
   % 这块比较复杂，需要分情况讨论：
   % 1. 学术型硕士
   %    edegree：必须为Master of Arts或Master of Science（注意大小写）
@@ -54,46 +42,42 @@
   % 4. 专业型博士
   %    edegree：“填写专业学位英文名称全称”
   %    emajor：不填写此项
-  edegree={Doctor of Engineering},
+  edegree={Scholar of Engineering},
   emajor={Computer Science and Technology},
-  eauthor={Xue Ruini},
-  esupervisor={Professor Zheng Weimin},
-  eassosupervisor={Chen Wenguang},
+  eauthor={He Qi},
+  esupervisor={Associate Professor Huang Zhenchun},
   % 日期自动生成，若需指定按如下方式修改：
   % edate={December, 2005},
   %
   % 关键词用“英文逗号”分割
-  ckeywords={TeX, LaTeX, CJK, 模板, 论文},
-  ekeywords={TeX, LaTeX, CJK, template, thesis}
 }
 
 % 定义中英文摘要和关键字
 \begin{cabstract}
-  论文的摘要是对论文研究内容和成果的高度概括。摘要应对论文所研究的问题及其研究目
-  的进行描述，对研究方法和过程进行简单介绍，对研究成果和所得结论进行概括。摘要应
-  具有独立性和自明性，其内容应包含与论文全文同等量的主要信息。使读者即使不阅读全
-  文，通过摘要就能了解论文的总体内容和主要成果。
+  耦合技术是解决气候多模式模拟问题的重要手段。目前已有一种基于顶层驱动的耦合器
+  可以对多个模式分量进行全局调度、数据交换、统计分析、自动存储恢复等功能。我们
+  通过将已存在的模式分量适配进该耦合器来复现模式分量结果的方式，对该耦合器的功能
+  进行验证和改进。
+  
+  我们选用F2000实验作为我们的复现目标。这个实验主要由4个模式分量和1个数据分量构成，
+  其原本的工作模式是由驱动模块启动各个模式分量并进行数据交换，然后各个模块分别进行
+  各自独立的计算、存储、统计、恢复等功能。现在，我们将这些分量进行重构，在保持其
+  原有的计算机能不改变的情况下，将存储、统计、恢复等功能集成到耦合器来处理。
 
-  论文摘要的书写应力求精确、简明。切忌写成对论文书写内容进行提要的形式，尤其要避
-  免“第 1 章……；第 2 章……；……”这种或类似的陈述方式。
+  重构和复现过程验证了耦合器对各种传统模式分量的适配能力。通过从耦合器进行
+  的全局数据分析，我们可以将不同模式分量的数据结合在一起。耦合器全局调度的存储和
+  恢复功能确保了整个多模式模拟的同步性和稳定性。对某单一模式分量的插拔实验提供了
+  模式分量更新无缝对接和等位模式分量数据比较的功能。
 
-  本文介绍清华大学论文模板 \thuthesis{} 的使用方法。本模板符合学校的本科、硕士、
-  博士论文格式要求。
+  在重构和适配过程中，我们编写了大量调试工具，其中一部分经过标准化后可以帮助耦合器
+  进行调试信息动态输出和错误定位。针对模式分量内部可能出现的错误，我们也提供了一套
+  嵌入式调试流程。这些调试工具可以在较短的工作量内定位耦合器配置错误或是确认模式
+  分量内部错误。
 
-  本文的创新点主要有：
-  \begin{itemize}
-    \item 用例子来解释模板的使用方法；
-    \item 用废话来填充无关紧要的部分；
-    \item 一边学习摸索一边编写新代码。
-  \end{itemize}
-
-  关键词是为了文献标引工作、用以表示全文主要内容信息的单词或术语。关键词不超过 5
-  个，每个关键词中间用分号分隔。（模板作者注：关键词分隔符不用考虑，模板会自动处
-  理。英文关键词同理。）
 \end{cabstract}
 
 % 如果习惯关键字跟在摘要文字后面，可以用直接命令来设置，如下：
-% \ckeywords{\TeX, \LaTeX, CJK, 模板, 论文}
+\ckeywords{地球系统模式, 耦合器, 描述语言, 自动耦合, 可行性验证}
 
 \begin{eabstract}
    An abstract of a dissertation is a summary and extraction of research work
