@@ -15,7 +15,13 @@ CESM\texttrademark\footnote{http://www.cesm.ucar.edu/}，全称COMMUNITY EARTH S
 
 原始CCM模型的局限性在于它不包括全球海洋和海冰模型。因此，在1994年，NCAR科学家提交了一项计划，以国家科学基金会（NSF）开发和使用气候系统模型（CSM），其中包括大气、陆面、海洋和海冰的模型。这些模式分量能够对分量间的通量不进行任何的情况下进行耦合。该计划最初侧重于气候系统的物理方面，然后在随后的版本中追加了生物地球化学插件和高层大气模式分量。该项目的第一阶段是NCAR工作人员开发的模型，之后，模型和相关数据集将提供给科学界。此外，该项目还计划建立一个新的模型和代码社区，让感兴趣的科学界有机会参与CSM的各个方面。这也是我们能够基于该模型进行后续开发和封装的重要条件之一。
 
+\subsection{主要框架}
 
+CESM代码主要分为两部分：模式分量和实例生成脚本包。
+
+模式分量主要分为大气模式分量atm\footnote{atmosphere}，海洋模式分量ocn\footnote{ocean}，陆地模式lnd\footnote{land}，海冰模式ice\footnote{sea-ice}，冰川模式glc\footnote{land-ice}，海浪模式wav\footnote{ocean-wave}，海河径流模式rof\footnote{river-runoff}，以及一个专门用于数据交换的模式分量drv\footnote{也作coupler, cpl}。
+
+单个模式分量内部包含多种实现方式。
 
 \section{字体命令}
 \label{sec:first}
