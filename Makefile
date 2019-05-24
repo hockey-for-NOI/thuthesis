@@ -28,7 +28,7 @@ endif
 
 .PHONY: all clean distclean dist thesis viewthesis shuji viewshuji doc viewdoc cls check FORCE_MAKE
 
-all: doc thesis shuji
+all: thesis
 
 cls: $(CLSFILES)
 
