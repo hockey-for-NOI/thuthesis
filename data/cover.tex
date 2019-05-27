@@ -80,23 +80,15 @@
 \ckeywords{地球系统模式, 耦合器, 描述语言, 自动耦合, 可行性验证}
 
 \begin{eabstract}
-   An abstract of a dissertation is a summary and extraction of research work
-   and contributions. Included in an abstract should be description of research
-   topic and research objective, brief introduction to methodology and research
-   process, and summarization of conclusion and contributions of the
-   research. An abstract should be characterized by independence and clarity and
-   carry identical information with the dissertation. It should be such that the
-   general idea and major contributions of the dissertation are conveyed without
-   reading the dissertation.
 
-   An abstract should be concise and to the point. It is a misunderstanding to
-   make an abstract an outline of the dissertation and words ``the first
-   chapter'', ``the second chapter'' and the like should be avoided in the
-   abstract.
+Coupling technology is an important means to solve the problem of multi-model climate simulation. At present, a coupler based on top-level driver can perform global scheduling, data exchange, statistical analysis, automatic storage recovery and other functions for multiple mode components. We verify and improve the function of the coupler by adapting the existing mode components to the coupler to reproduce the results of the mode components.
 
-   Key words are terms used in a dissertation for indexing, reflecting core
-   information of the dissertation. An abstract may contain a maximum of 5 key
-   words, with semi-colons used in between to separate one another.
+We chose F2000 experiment as our recurrence target. This experiment is mainly composed of four mode components and one data component. The original working mode of this experiment is that the driver module starts each mode component and exchanges data. Then each module carries out its own independent calculation, storage, statistics, recovery and other functions. Now, we reconstruct these components and integrate the functions of storage, statistics and recovery into the coupler to deal with them while keeping the original computer unchanged.
+
+The reconstructing and reproducing process verifies the coupler's adaptability to various traditional mode components. By analyzing the global data from the coupler, we can combine the data of different mode components. The storage and recovery function of coupler global scheduling ensures the synchronization and stability of the whole multi-mode simulation. The interpolation experiment of a single mode component provides the function of seamless docking of mode component updating and data comparison of allele mode component.
+
+In the process of reconfiguration and adaptation, we have compiled a large number of debugging tools, some of which are standardized to help couplers to dynamically output debugging information and locate errors. We also provide an embedded debugging process for possible errors within the mode components. These debugging tools can locate coupler configuration errors or confirm mode component internal errors within a relatively short workload.
+
 \end{eabstract}
 
-% \ekeywords{\TeX, \LaTeX, CJK, template, thesis}
+\ekeywords{Earth System Model, Coupler, Description Language, Automatic Coupling, Feasibility Verification}
