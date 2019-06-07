@@ -10,6 +10,98 @@
 \tikzstyle{every node}=[draw=black,thick,anchor=west]
 \tikzstyle{selected}=[draw=red,fill=red!30]
 \tikzstyle{optional}=[dashed,fill=gray!50]
+
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.5,-0.7) and
+  two children at (0.5,-0.7) and (0.5,-1.4)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+  \node{models}
+  child { node {model}
+    child { node {name}
+      child {node {atm}}
+    }
+    child [missing] {}
+    child { node {version}
+      child {node {cam}}
+    }
+    child [missing] {}
+    child { node {attrVect}
+      child {node {...}}
+    }
+    child [missing] {}    
+    child { node {domain}
+      child {node {...}}
+    }
+    child [missing] {}    
+    child { node {method}
+      child {node {init}
+        child { node {name}
+        	child { node {atm\_init\_mct}}
+        }
+        child [missing] {}
+        child { node {in\_args}
+          child { node {arg}
+            child { node {atm2x\_atmatm}}
+          }
+        }
+        child [missing] {}
+        child [missing] {}
+        child { node {out\_args}
+          child { node {arg}
+            child { node {x2atm\_atmatm}}
+          }
+        }
+        child [missing] {}
+        child [missing] {}
+      }
+      child [missing] {}
+      child [missing] {}
+      child [missing] {}
+      child [missing] {}
+      child [missing] {}
+      child [missing] {}
+      child {node {run}
+        child { node {...} }
+      }
+      child [missing] {}    
+      child {node {final}
+        child { node {...} }
+      }
+      child [missing] {}    
+    }
+  }
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child [missing] {}    
+  child { node {model}
+    child { node {name}
+      child { node {ocn} }
+    }
+    child [missing] {}
+    child { node {...} }
+  }
+  child [missing] {}
+  child [missing] {}
+  child [missing] {}
+  child {node {...}};
+\end{tikzpicture}
+
+
 \begin{tikzpicture}[%
   grow via three points={one child at (0.5,-0.7) and
   two children at (0.5,-0.7) and (0.5,-1.4)},
@@ -172,5 +264,87 @@
     child { node {end\_restart type='bool'}
       child {node {.false.}}
     }
+  };
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.5,-0.7) and
+  two children at (0.5,-0.7) and (0.5,-1.4)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+
+  \node{field}
+  child { node {fieldMeta}
+  child { node {fields}
+    child { node {fieldVar name='flds\_doom\_coord'}
+    	child { node {lat:lon} }
+    }
+    child [missing] {}
+    child { node {fieldVar name='flds\_doom\_other'}
+    	child { node {area:aream:mask:frac} }
+    }
+    child [missing] {}
+    child { node {...} }
+  }
+  child [missing] {}
+  child [missing] {}
+  child [missing] {}
+  child [missing] {}
+  child [missing] {}
+  child { node {fldMeta}
+    child { node {fld}
+      child { node {shortname}
+        child {node {lat}}
+      }
+      child [missing] {}
+      child { node {longname}
+        child {node {unknown}}
+      }
+      child [missing] {}
+      child { node {stdname}
+        child {node {latitude}}
+      }
+      child [missing] {}
+      child { node {units}
+        child {node {degrees north}}
+      }
+      child [missing] {}
+    }
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child { node {fld}
+      child { node {shortname}
+        child {node {Sa\_u}}
+      }
+      child [missing] {}
+      child { node {longname}
+        child {node {Zonal wind at the lowest model level}}
+      }
+      child [missing] {}
+      child { node {stdname}
+        child {node {eastward\_wind}}
+      }
+      child [missing] {}
+      child { node {units}
+        child {node {m s-1}}
+      }
+      child [missing] {}
+    }
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child { node {...}}
+  }
   };
 \end{tikzpicture}
