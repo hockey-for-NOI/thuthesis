@@ -44,7 +44,7 @@
           child [missing] {}
           child { node {src [name='lnd']} 
           	child { node {field [type='state' frac='normal']}
-          	  child {node {Sl\_fv:Sl\_ram1:Sl\_snowh:...}}
+          	  child {node {Sl\_fv:Sl\_ram1:...}}
           	}
           	child [missing] {}          	
           }
@@ -103,4 +103,74 @@
       child [missing] {}
       child { node {...} } 
     };
+\end{tikzpicture}
+
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.5,-0.7) and
+  two children at (0.5,-0.7) and (0.5,-1.4)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+  \node{option}
+  child{ node {time}
+    child { node {calendar type='string'}
+      child { node {NO\_LEAP} }
+    }
+    child [missing] {}
+    child { node {stop\_option type='string'}
+      child {node {ndays}}
+    }
+    child [missing] {}
+    child { node {stop\_n type='int'}
+      child {node {10}}
+    }
+    child [missing] {}
+    child { node {stop\_ymd type='int'}
+      child {node {20010301}}
+    }
+    child [missing] {}
+    child { node {restart\_option type='string'}
+      child {node {ndays}}
+    }
+    child [missing] {}
+    child { node {restart\_n type='int'}
+      child {node {5}}
+    }
+    child [missing] {}
+    child { node {restart\_ymd type='int'}
+      child {node {-1}}
+    }
+    child [missing] {}
+    child { node {history\_option type='string'}
+      child {node {ndays}}
+    }
+    child [missing] {}
+    child { node {...}}
+    child { node {start\_ymd type='int'}
+      child {node {20010101}}
+    }
+    child [missing] {}
+    child { node {start\_tod type='int'}
+      child {node {0}}
+    }
+    child [missing] {}
+    child { node {ref\_ymd} }
+    child { node {comps}
+      child {node {atm\_cpl\_dt}
+        child {node {3600}}
+      }
+      child [missing] {}
+      child {node {ocn\_cpl\_dt}
+        child {node {86400}}
+      }
+      child [missing] {}
+      child {node {...} }
+    }
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child { node {end\_restart type='bool'}
+      child {node {.false.}}
+    }
+  };
 \end{tikzpicture}
