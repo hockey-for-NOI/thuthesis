@@ -464,10 +464,101 @@
 
 \section {代码生成}
 
+\begin{lstlisting}
+('name', 'atm2x_atmx')
+('model', 'atm')
+('fraclist', 'afrac:ofrac:lfrac:ifrac')
+('init', 'fraction_atm_init')
+('update', 'fraction_atm_update')
+{'fraclist': 'afrac:ofrac:lfrac:ifrac', 
+'init': 'fraction_atm_init', 'update': 
+'fraction_atm_update', 'fracs': [{'mapper': 
+'mapper_Smatocn2atm', 'model': 'ocn', 'name': 
+'ofrac'}, {'mapper': 'mapper_Smatlnd2atm',
+'model': 'lnd', 'name': 'lfrac'}, {'mapper':
+'mapper_Smatice2atm', 'model': 'ice',
+'name': 'ifrac'}]}
+...
+('name', 'mapper_comp_map')
+('arg', 'ocn2x_ocnx')
+('arg', 'ocn2x_atmx')
+('attrVect', 'lnd2x_lndx')
+('field', 'Sl_fv:Sl_ram1:Sl_snowh:Fall_flxdst1:
+Fall_flxdst2:Fall_flxdst3:Fall_flxdst4')
+...
+\end{lstlisting}
+
 \section {内部库预编译}
 
-\section {生成实例编译}
+\begin{lstlisting}
+make[1]: Entering directory `/home/hq/git
+/protected/BCGen/baseCpl/src/logUtils'
+mpif90 -c -I/home/hq/git/protected/BCGen/
+baseCpl/include -L/home/hq/git/protected/
+BCGen/baseCpl/lib logUtil.F90 
+mv *.o /home/hq/git/protected/BCGen/baseCpl/lib
+mv *.mod /home/hq/git/protected/BCGen/baseCpl/include
+make[1]: Leaving directory 
+...
+Checking whether input datasets exist locally...
+OK -- found depvel_file = /mnt/CESM-data/inputdata/
+atm/cam/chem/trop_mozart/dvel/depvel_monthly.nc
+OK -- found tracer_cnst_filelist = /mnt/CESM-data/
+inputdata/atm/cam/chem/trop_mozart_aero/oxid/
+oxid_1.9x2.5_L26_clim_list.c090805.txt
+...
+\end{lstlisting}
 
-\section {运行}
+\section {生成实例}
+
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.5,-0.7) and
+  two children at (0.5,-0.7) and (0.5,-1.4)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+
+  \node{BCGen}
+    child { node{BCGen\_inst}
+    	child { node {include} 
+    		child { node {这里存放内部库和各个模式分量实现的.mod文件} }
+    	}
+    	child [missing] {}
+    	child { node {lib}
+    		child { node {这里存放内部库和各个模式分量实现的.o和.a文件} }
+    	}
+    	child [missing] {}
+    	child { node {scripts}
+    		child { node {instBuild.sh 自动编译脚本} }
+    		child { node {pullDeps.py 自动更新依赖脚本} }
+    	}
+    	child [missing] {}
+    	child [missing] {}
+    	child { node {src}
+    		child { node {mapper.rc 部分数值文件列表}}
+    	}
+    	child [missing] {}
+    	child { node {models}
+    		child { node {cpl}
+    			child { node {耦合器主代码，可执行文件和依赖自动编译到该目录} }
+    		}
+    		child [missing] {}
+    		child { node {atm}
+    			child { node {大气模式分量实现} }
+    		}
+    		child [missing] {}
+    		child { node {ocn}
+    			child { node {海洋模式分量实现} }
+    		}
+    		child [missing] {}
+    		child { node {...} }
+    	}
+    };
+\end{tikzpicture}
 
 \section {数据分析}
+
+通过 ncl\footnote{http://www.ncl.ucar.edu/Applications/maponly.shtml} 语言对输出的 NetCDF 数据进行作图，可以得出可视化结果。以下为其中一例数据结构：
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{../figures/test.png}
+\end{figure}
