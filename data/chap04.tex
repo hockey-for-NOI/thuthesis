@@ -362,7 +362,7 @@
     		}
     		child [missing] {}
     		child { node {fields}
-    			child {node {flds\_xao\_states,flds\_xao\_fluxes,flds\_xao\_fields}}
+    			child {node {flds\_xao\_states,flds\_xao\_fluxes,...}}
     		}
     		child [missing] {}
     		child { node {deps}
@@ -464,6 +464,8 @@
 
 \section {代码生成}
 
+在用户配置全部录入后，可以通过代码生成模块中的 instCreator 模块进行解析和代码生成。该模块会将解析出的结果以 log 的形式输出到屏幕。若配置正确，应当会产生如下输出：
+
 \begin{lstlisting}
 ('name', 'atm2x_atmx')
 ('model', 'atm')
@@ -490,6 +492,8 @@ Fall_flxdst2:Fall_flxdst3:Fall_flxdst4')
 
 \section {内部库预编译}
 
+全部代码生成后会调用 make 工具进行自动内部库编译，若内部库和生成代码格式正确且接口符合，应当会产生如下输出
+
 \begin{lstlisting}
 make[1]: Entering directory `/home/hq/git
 /protected/BCGen/baseCpl/src/logUtils'
@@ -510,6 +514,8 @@ oxid_1.9x2.5_L26_clim_list.c090805.txt
 \end{lstlisting}
 
 \section {生成实例}
+
+编译后的内部库会与各个模式分量实现的代码一同创建为实验实例，其结构如下图。该实例可以直接编译运行，或对模式分量实现进行嵌入式调试。
 
 \begin{tikzpicture}[%
   grow via three points={one child at (0.5,-0.7) and
@@ -538,7 +544,7 @@ oxid_1.9x2.5_L26_clim_list.c090805.txt
     	child [missing] {}
     	child { node {models}
     		child { node {cpl}
-    			child { node {耦合器主代码，可执行文件和依赖自动编译到该目录} }
+    			child { node {耦合器主代码，可自动编译为可执行文件} }
     		}
     		child [missing] {}
     		child { node {atm}
