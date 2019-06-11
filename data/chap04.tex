@@ -11,6 +11,7 @@
 \tikzstyle{selected}=[draw=red,fill=red!30]
 \tikzstyle{optional}=[dashed,fill=gray!50]
 
+\begin{figure}[H]
 \begin{tikzpicture}[%
   grow via three points={one child at (0.5,-0.7) and
   two children at (0.5,-0.7) and (0.5,-1.4)},
@@ -100,8 +101,11 @@
   child [missing] {}
   child {node {...}};
 \end{tikzpicture}
+\caption{models.xml 结构示意图}
+\end{figure}
 
 
+\begin{figure}[H]
 \begin{tikzpicture}[%
   grow via three points={one child at (0.5,-0.7) and
   two children at (0.5,-0.7) and (0.5,-1.4)},
@@ -196,7 +200,10 @@
       child { node {...} } 
     };
 \end{tikzpicture}
+\caption{setup.xml 结构示意图}
+\end{figure}
 
+\begin{figure}[H]
 \begin{tikzpicture}[%
   grow via three points={one child at (0.5,-0.7) and
   two children at (0.5,-0.7) and (0.5,-1.4)},
@@ -266,8 +273,10 @@
     }
   };
 \end{tikzpicture}
+\caption{option.xml 结构示意图}
+\end{figure}
 
-
+\begin{figure}[H]
 \begin{tikzpicture}[%
   grow via three points={one child at (0.5,-0.7) and
   two children at (0.5,-0.7) and (0.5,-1.4)},
@@ -348,7 +357,10 @@
   }
   };
 \end{tikzpicture}
+\caption{fields.xml 结构示意图}
+\end{figure}
 
+\begin{figure}[H]
 \begin{tikzpicture}[%
   grow via three points={one child at (0.5,-0.7) and
   two children at (0.5,-0.7) and (0.5,-1.4)},
@@ -459,6 +471,8 @@
    		child { node {...} }
     };
 \end{tikzpicture}
+\caption{fakeModel.xml 结构示意图}
+\end{figure}
 
 以上是用户输入的配置文件的主要部分，分别对应 models.xml ， setup.xml ， option.xml ， field.xml ，  fakeModel.xml 五个配置文件。由于篇幅所限部分域用省略号 ... 代替，其余配置文件请参见 github 代码库 \footnote{https://github.com/NeoGeon/BCGen} 。
 
@@ -517,6 +531,7 @@ oxid_1.9x2.5_L26_clim_list.c090805.txt
 
 编译后的内部库会与各个模式分量实现的代码一同创建为实验实例，其结构如下图。该实例可以直接编译运行，或对模式分量实现进行嵌入式调试。
 
+\begin{figure}[H]
 \begin{tikzpicture}[%
   grow via three points={one child at (0.5,-0.7) and
   two children at (0.5,-0.7) and (0.5,-1.4)},
@@ -559,6 +574,8 @@ oxid_1.9x2.5_L26_clim_list.c090805.txt
     	}
     };
 \end{tikzpicture}
+\caption{生成实例结构示意图}
+\end{figure}
 
 \section {数据分析}
 
@@ -567,4 +584,5 @@ oxid_1.9x2.5_L26_clim_list.c090805.txt
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{../figures/test.png}
+\caption{数据分析结果图}
 \end{figure}
