@@ -6,6 +6,18 @@
 
 \section{配置文件}
 
+以下是用户输入的配置文件的主要部分，分别对应 models.xml ， setup.xml ， option.xml ， field.xml ，  fakeModel.xml 五个配置文件。由于篇幅所限部分域用省略号 ... 代替，其余配置文件请参见 github 代码库 \footnote{https://github.com/NeoGeon/BCGen} 。
+
+models.xml 下的每个model字段描述一个模式分量实现，其中主要包含模式分量名name，模式分量实现名version，数据结构attrVect，域规格domain，对外函数接口method等。
+
+setup.xml 下的models包含实验实例全部需要用到的模式分量实现。每个model通过name和version字段对 models.xml进行引用，其余字段为该模式分量实现在当前实验实例中使用所需的配置。特别的，input字段描述了该模式分量实现各个接口的连接方式。
+
+option.xml 下包括各个内部库的参数设置，这里主要是time时钟模块。不同模式分量的同类设置（如 atm\_cpl\_dt ， ocn\_cpl\_dt 等）被统一放置在该配置文件的同一字段 comps 中。
+
+fields.xml 对各个数据和数据结构进行了统一注册。每个数据在fldMeta字段中进行注册，包括shortname, longname, stdname, units四个字段，缺失记unknown。每个数据结构在fields字段中记录其包含的所有数据。同一数据可能被多个不同数据结构包含。
+
+fakeModel.xml 主要描述了各个特殊数据结构组成的伪模型，这里以海气通量xao为代表。其结构与 models 类似但灵活性更大，可以在 model 字段下插入依赖的其他信息，如多个数据结构 xao\_ox 和 xao\_ax 可以在variables字段下分别对相关调用接口 method 进行定义。
+
 \usetikzlibrary{trees}
 \tikzstyle{every node}=[draw=black,thick,anchor=west]
 \tikzstyle{selected}=[draw=red,fill=red!30]
@@ -474,7 +486,6 @@
 \caption{fakeModel.xml 结构示意图}
 \end{figure}
 
-以上是用户输入的配置文件的主要部分，分别对应 models.xml ， setup.xml ， option.xml ， field.xml ，  fakeModel.xml 五个配置文件。由于篇幅所限部分域用省略号 ... 代替，其余配置文件请参见 github 代码库 \footnote{https://github.com/NeoGeon/BCGen} 。
 
 \section {代码生成}
 
