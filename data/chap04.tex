@@ -2,21 +2,13 @@
 \chapter{实验结果}
 \label{cha:experiment}
 
-在本章中，我们完整地展示了 F2000 模式分量的代码生成、编译、运行、数据分析等步骤。
+在本章中，本文完整地展示了 F2000 模式分量的代码生成、编译、运行、数据分析等步骤。
 
 \section{配置文件}
 
 以下是用户输入的配置文件的主要部分，分别对应 models.xml ， setup.xml ， option.xml ， field.xml ，  fakeModel.xml 五个配置文件。由于篇幅所限部分域用省略号 ... 代替，其余配置文件请参见 github 代码库 \footnote{https://github.com/NeoGeon/BCGen} 。
 
-models.xml 下的每个model字段描述一个模式分量实现，其中主要包含模式分量名name，模式分量实现名version，数据结构attrVect，域规格domain，对外函数接口method等。
-
-setup.xml 下的models包含实验实例全部需要用到的模式分量实现。每个model通过name和version字段对 models.xml进行引用，其余字段为该模式分量实现在当前实验实例中使用所需的配置。特别的，input字段描述了该模式分量实现各个接口的连接方式。
-
-option.xml 下包括各个内部库的参数设置，这里主要是time时钟模块。不同模式分量的同类设置（如 atm\_cpl\_dt ， ocn\_cpl\_dt 等）被统一放置在该配置文件的同一字段 comps 中。
-
-fields.xml 对各个数据和数据结构进行了统一注册。每个数据在fldMeta字段中进行注册，包括shortname, longname, stdname, units四个字段，缺失记unknown。每个数据结构在fields字段中记录其包含的所有数据。同一数据可能被多个不同数据结构包含。
-
-fakeModel.xml 主要描述了各个特殊数据结构组成的伪模型，这里以海气通量xao为代表。其结构与 models 类似但灵活性更大，可以在 model 字段下插入依赖的其他信息，如多个数据结构 xao\_ox 和 xao\_ax 可以在variables字段下分别对相关调用接口 method 进行定义。
+models.xml 下的每个model字段描述一个模式分量实现，其中主要包含模式分量名name，模式分量实现名version，数据结构attrVect，域规格domain，对外函数接口method等。以cam模式分量实现为例，该模式分量实现属于atm模式分量，因此name字段设为atm，version字段设为cam。其详细配置位于同目录下的camDesc.xml文件中，这里将metaFile字段设定为camDesc.xml以引用目标文件。其相关输入输出数据结构分为flds\_atm2x\_states，flds\_atm2x\_fluxes，flds\_x2atm\_states，flds\_x2atm\_fluxes四部分，在attrVect字段中的field字段进行注册，其具体内容在fields.xml中注册并引用。两个域规格flds\_dom\_coord和flds\_dom\_other数据结构在domain字段中进行注册，其具体内容在fields.xml中注册并引用。主要方法atm\_init\_mct，atm\_run\_mct，atm\_final\_mct在method中注册，其输入输出参数atm2x\_atmatm和x2atm\_atmatm分别在in\_args和out\_args的arg字段注册。
 
 \usetikzlibrary{trees}
 \tikzstyle{every node}=[draw=black,thick,anchor=west]
@@ -116,6 +108,8 @@ fakeModel.xml 主要描述了各个特殊数据结构组成的伪模型，这里
 \caption{models.xml 结构示意图}
 \end{figure}
 
+setup.xml 下的models包含实验实例全部需要用到的模式分量实现。每个model通过name和version字段对 models.xml进行引用，其余字段为该模式分量实现在当前实验实例中使用所需的配置。特别的，input字段描述了该模式分量实现各个接口的连接方式。以cam模式分量实现为例，该模式分量通过name字段atm和version字段cam对models.xml进行引用，其分辨率为fv4x5，在res字段设置。根据相关物理模型，frac字段设为normal。cam模型输入的各个数据根据来源在input进行注册，与之相连的ocn, lnd, ice模型和xao伪模型分别在src字段的设置中记录，其field字段根据不同数据类型对各个要传输的数据分别记录，如来自ocn的So\_t数据类型为state，比率类型normal，因此在src name='ocn' 中添加field type='state' frac='normal'的字段So\_t。多个字段的情况如来自lnd模型的Sl\_fv和Sl\_ram1在src name='lnd'字段中添加field type='
+state' frac='normal'的字段Sl\_fv:Sl\_ram1。
 
 \begin{figure}[H]
 \begin{tikzpicture}[%
@@ -215,6 +209,9 @@ fakeModel.xml 主要描述了各个特殊数据结构组成的伪模型，这里
 \caption{setup.xml 结构示意图}
 \end{figure}
 
+option.xml 下包括各个内部库的参数设置，这里主要是time时钟模块，日期无跳跃在calendar type='string' 字段中记录NO\_LEAP，起始日期在start\_ymd type='int'字段中记录20010101，起始时间在start\_tod type='int'中记录0，停止时间在stop\_option type='string'字段中设置ndays并在stop\_n type='int'字段中设置10。重启周期在restart\_option type='string'字段中设置ndays并在restart\_n type='int'字段中设置5。历史记录周期在history\_option type='string'字段中设置ndays并在history\_n type='int'字段中设置1。各个模式分量的运行时间周期在comps字段中对各个模式分量进行记录，atm模式分量在atm\_cpl\_dt字段中记录3600，ocn模式分量在ocn\_cpl\_dt字段中记录86400。
+
+
 \begin{figure}[H]
 \begin{tikzpicture}[%
   grow via three points={one child at (0.5,-0.7) and
@@ -287,6 +284,8 @@ fakeModel.xml 主要描述了各个特殊数据结构组成的伪模型，这里
 \end{tikzpicture}
 \caption{option.xml 结构示意图}
 \end{figure}
+
+fields.xml 对各个数据和数据结构进行了统一注册。每个数据在fldMeta字段中进行注册，包括shortname, longname, stdname, units四个字段，缺失记unknown。每个数据结构在fields字段中记录其包含的所有数据。同一数据可能被多个不同数据结构包含。flds\_dom\_coord数据结构在fields中记录为fieldVar name='flds\_dom\_coord'字段并在其中的field字段记录lat:lon，这两个数据分别在fldMeta字段中记录为fld字段，他们的shortname字段分别为lat和lon，longname字段均为unknown，stdname字段分别为latitude和longitude，units字段分别为degrees north和degrees east。
 
 \begin{figure}[H]
 \begin{tikzpicture}[%
@@ -371,6 +370,8 @@ fakeModel.xml 主要描述了各个特殊数据结构组成的伪模型，这里
 \end{tikzpicture}
 \caption{fields.xml 结构示意图}
 \end{figure}
+
+fakeModel.xml 主要描述了各个特殊数据结构组成的伪模型，这里以海气通量xao为代表，其相关数据结构分为flds\_xao\_states，flds\_xao\_fluxes，flds\_xao\_fields三部分，在attrVect字段中的field字段进行注册，其具体内容在fields.xml中注册并引用。其依赖模式分量atm和ocn在deps字段中记录为atm:ocn，相关变量xao\_ox和xao\_ax分别在variables字段中记录为variable字段，以xao\_ox为例，其name字段记为xao\_ox，grid字段记录为ocn，method字段中对init, run, final三套函数在phase字段中进行注册，init阶段第一个函数name字段为flux\_init\_mct，args字段中注册的四个参数分别为gsmap, domain, mpicom, fraction，均通过ocn模型，因此在arg model='ocn'字段中分别记录。 init阶段第二个函数name字段为flux\_ocnalb\_mct，其参数有两个来源于ocn，在arg model='ocn'字段中分别记录为comp和fraction，另一个参数是该变量自身，直接在arg字段中记录xao\_ox。run和final类似。在xao\_ox和xao\_ax全部注册完毕后该文件的variables字段完成。
 
 \begin{figure}[H]
 \begin{tikzpicture}[%
