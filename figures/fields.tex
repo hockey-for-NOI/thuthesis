@@ -1,0 +1,90 @@
+\documentclass[tikz,border=2pt]{standalone} 
+\begin{document} 
+
+\usetikzlibrary{trees}
+\tikzstyle{every node}=[draw=black,thick,anchor=west]
+\tikzstyle{selected}=[draw=red,fill=red!30]
+\tikzstyle{optional}=[dashed,fill=gray!50]
+
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.5,-0.7) and
+  two children at (0.5,-0.7) and (0.5,-1.4)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+
+  \node{field}
+  child { node {fieldMeta}
+  child { node {fields}
+    child { node {fieldVar name='flds\_doom\_coord'}
+    	child { node {lat:lon} }
+    }
+    child [missing] {}
+    child { node {fieldVar name='flds\_doom\_other'}
+    	child { node {area:aream:mask:frac} }
+    }
+    child [missing] {}
+    child { node {...} }
+  }
+  child [missing] {}
+  child [missing] {}
+  child [missing] {}
+  child [missing] {}
+  child [missing] {}
+  child { node {fldMeta}
+    child { node {fld}
+      child { node {shortname}
+        child {node {lat}}
+      }
+      child [missing] {}
+      child { node {longname}
+        child {node {unknown}}
+      }
+      child [missing] {}
+      child { node {stdname}
+        child {node {latitude}}
+      }
+      child [missing] {}
+      child { node {units}
+        child {node {degrees north}}
+      }
+      child [missing] {}
+    }
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child { node {fld}
+      child { node {shortname}
+        child {node {Sa\_u}}
+      }
+      child [missing] {}
+      child { node {longname}
+        child {node {Zonal wind at the lowest model level}}
+      }
+      child [missing] {}
+      child { node {stdname}
+        child {node {eastward\_wind}}
+      }
+      child [missing] {}
+      child { node {units}
+        child {node {m s-1}}
+      }
+      child [missing] {}
+    }
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child { node {...}}
+  }
+  };
+\end{tikzpicture}
+
+\end{document}

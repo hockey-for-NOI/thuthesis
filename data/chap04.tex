@@ -10,101 +10,9 @@
 
 models.xml 下的每个model字段描述一个模式分量实现，其中主要包含模式分量名name，模式分量实现名version，数据结构attrVect，域规格domain，对外函数接口method等。以cam模式分量实现为例，该模式分量实现属于atm模式分量，因此name字段设为atm，version字段设为cam。其详细配置位于同目录下的camDesc.xml文件中，这里将metaFile字段设定为camDesc.xml以引用目标文件。其相关输入输出数据结构分为flds\_atm2x\_states，flds\_atm2x\_fluxes，flds\_x2atm\_states，flds\_x2atm\_fluxes四部分，在attrVect字段中的field字段进行注册，其具体内容在fields.xml中注册并引用。两个域规格flds\_dom\_coord和flds\_dom\_other数据结构在domain字段中进行注册，其具体内容在fields.xml中注册并引用。主要方法atm\_init\_mct，atm\_run\_mct，atm\_final\_mct在method中注册，其输入输出参数atm2x\_atmatm和x2atm\_atmatm分别在in\_args和out\_args的arg字段注册。
 
-\usetikzlibrary{trees}
-\tikzstyle{every node}=[draw=black,thick,anchor=west]
-\tikzstyle{selected}=[draw=red,fill=red!30]
-\tikzstyle{optional}=[dashed,fill=gray!50]
-
 \begin{figure}[H]
-\begin{tikzpicture}[%
-  grow via three points={one child at (0.5,-0.7) and
-  two children at (0.5,-0.7) and (0.5,-1.4)},
-  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-  \node{models}
-  child { node {model}
-    child { node {name}
-      child {node {atm}}
-    }
-    child [missing] {}
-    child { node {version}
-      child {node {cam}}
-    }
-    child [missing] {}
-    child { node {attrVect}
-      child {node {...}}
-    }
-    child [missing] {}    
-    child { node {domain}
-      child {node {...}}
-    }
-    child [missing] {}    
-    child { node {method}
-      child {node {init}
-        child { node {name}
-        	child { node {atm\_init\_mct}}
-        }
-        child [missing] {}
-        child { node {in\_args}
-          child { node {arg}
-            child { node {atm2x\_atmatm}}
-          }
-        }
-        child [missing] {}
-        child [missing] {}
-        child { node {out\_args}
-          child { node {arg}
-            child { node {x2atm\_atmatm}}
-          }
-        }
-        child [missing] {}
-        child [missing] {}
-      }
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child {node {run}
-        child { node {...} }
-      }
-      child [missing] {}    
-      child {node {final}
-        child { node {...} }
-      }
-      child [missing] {}    
-    }
-  }
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child [missing] {}    
-  child { node {model}
-    child { node {name}
-      child { node {ocn} }
-    }
-    child [missing] {}
-    child { node {...} }
-  }
-  child [missing] {}
-  child [missing] {}
-  child [missing] {}
-  child {node {...}};
-\end{tikzpicture}
+\centering
+\includegraphics{../figures/models.pdf}
 \caption{models.xml 结构示意图}
 \end{figure}
 
@@ -112,381 +20,36 @@ setup.xml 下的models包含实验实例全部需要用到的模式分量实现�
 state' frac='normal'的字段Sl\_fv:Sl\_ram1。
 
 \begin{figure}[H]
-\begin{tikzpicture}[%
-  grow via three points={one child at (0.5,-0.7) and
-  two children at (0.5,-0.7) and (0.5,-1.4)},
-  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-  \node {setup}
-    child { node {models} 
-      child { node {model}
-        child { node {name}
-          child { node {atm} }
-        }
-        child [missing] {}
-        child { node {version}
-          child { node {cam} }
-        }
-        child [missing] {}    		
-        child { node {res}
-          child { node {fv4x5} }
-        }
-        child [missing] {}
-        child { node {frac [update=true]}
-          child { node {normal} }
-        }
-        child [missing] {}
-        child { node {input}
-          child { node {src [name='ocn']} 
-          	child { node {field [type='state' frac='normal']}
-          	  child {node {So\_t}}
-          	}
-          	child [missing] {}          	
-          }
-          child [missing] {}
-          child [missing] {}
-          child { node {src [name='lnd']} 
-          	child { node {field [type='state' frac='normal']}
-          	  child {node {Sl\_fv:Sl\_ram1:...}}
-          	}
-          	child [missing] {}          	
-          }
-          child [missing] {}
-          child [missing] {}
-          child { node {src [name='ice']} 
-          	child { node {field [type='state' frac='normal']}
-          	  child {node {Si\_avsdr}}
-          	}
-          	child [missing] {}          	
-          }
-          child [missing] {}
-          child [missing] {}          
-          child { node {src [name='xao' type='var']} 
-          	child { node {var}
-          	  child {node {xao\_ax}}
-          	}
-          	child [missing] {}      	
-          }
-          child [missing] {}
-          child [missing] {}        }
-        child [missing] {}
-      }
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child { node {model}
-        child { node {name}
-          child { node {ocn} }
-        }
-        child [missing] {}
-        child { node {...} }
-      }
-      child [missing] {}
-      child [missing] {}
-      child [missing] {}
-      child { node {...} } 
-    };
-\end{tikzpicture}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[height=.5\textheight]{../figures/setup.pdf}
 \caption{setup.xml 结构示意图}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[height=.5\textheight]{../figures/option.pdf}
+\caption{option.xml 结构示意图}
+\end{minipage}
 \end{figure}
 
 option.xml 下包括各个内部库的参数设置，这里主要是time时钟模块，日期无跳跃在calendar type='string' 字段中记录NO\_LEAP，起始日期在start\_ymd type='int'字段中记录20010101，起始时间在start\_tod type='int'中记录0，停止时间在stop\_option type='string'字段中设置ndays并在stop\_n type='int'字段中设置10。重启周期在restart\_option type='string'字段中设置ndays并在restart\_n type='int'字段中设置5。历史记录周期在history\_option type='string'字段中设置ndays并在history\_n type='int'字段中设置1。各个模式分量的运行时间周期在comps字段中对各个模式分量进行记录，atm模式分量在atm\_cpl\_dt字段中记录3600，ocn模式分量在ocn\_cpl\_dt字段中记录86400。
 
-
-\begin{figure}[H]
-\begin{tikzpicture}[%
-  grow via three points={one child at (0.5,-0.7) and
-  two children at (0.5,-0.7) and (0.5,-1.4)},
-  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-  \node{option}
-  child{ node {time}
-    child { node {calendar type='string'}
-      child { node {NO\_LEAP} }
-    }
-    child [missing] {}
-    child { node {stop\_option type='string'}
-      child {node {ndays}}
-    }
-    child [missing] {}
-    child { node {stop\_n type='int'}
-      child {node {10}}
-    }
-    child [missing] {}
-    child { node {stop\_ymd type='int'}
-      child {node {20010301}}
-    }
-    child [missing] {}
-    child { node {restart\_option type='string'}
-      child {node {ndays}}
-    }
-    child [missing] {}
-    child { node {restart\_n type='int'}
-      child {node {5}}
-    }
-    child [missing] {}
-    child { node {restart\_ymd type='int'}
-      child {node {-1}}
-    }
-    child [missing] {}
-    child { node {history\_option type='string'}
-      child {node {ndays}}
-    }
-    child [missing] {}
-    child { node {...}}
-    child { node {start\_ymd type='int'}
-      child {node {20010101}}
-    }
-    child [missing] {}
-    child { node {start\_tod type='int'}
-      child {node {0}}
-    }
-    child [missing] {}
-    child { node {ref\_ymd} }
-    child { node {comps}
-      child {node {atm\_cpl\_dt}
-        child {node {3600}}
-      }
-      child [missing] {}
-      child {node {ocn\_cpl\_dt}
-        child {node {86400}}
-      }
-      child [missing] {}
-      child {node {...} }
-    }
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child { node {end\_restart type='bool'}
-      child {node {.false.}}
-    }
-  };
-\end{tikzpicture}
-\caption{option.xml 结构示意图}
-\end{figure}
-
 fields.xml 对各个数据和数据结构进行了统一注册。每个数据在fldMeta字段中进行注册，包括shortname, longname, stdname, units四个字段，缺失记unknown。每个数据结构在fields字段中记录其包含的所有数据。同一数据可能被多个不同数据结构包含。flds\_dom\_coord数据结构在fields中记录为fieldVar name='flds\_dom\_coord'字段并在其中的field字段记录lat:lon，这两个数据分别在fldMeta字段中记录为fld字段，他们的shortname字段分别为lat和lon，longname字段均为unknown，stdname字段分别为latitude和longitude，units字段分别为degrees north和degrees east。
 
-\begin{figure}[H]
-\begin{tikzpicture}[%
-  grow via three points={one child at (0.5,-0.7) and
-  two children at (0.5,-0.7) and (0.5,-1.4)},
-  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-
-  \node{field}
-  child { node {fieldMeta}
-  child { node {fields}
-    child { node {fieldVar name='flds\_doom\_coord'}
-    	child { node {lat:lon} }
-    }
-    child [missing] {}
-    child { node {fieldVar name='flds\_doom\_other'}
-    	child { node {area:aream:mask:frac} }
-    }
-    child [missing] {}
-    child { node {...} }
-  }
-  child [missing] {}
-  child [missing] {}
-  child [missing] {}
-  child [missing] {}
-  child [missing] {}
-  child { node {fldMeta}
-    child { node {fld}
-      child { node {shortname}
-        child {node {lat}}
-      }
-      child [missing] {}
-      child { node {longname}
-        child {node {unknown}}
-      }
-      child [missing] {}
-      child { node {stdname}
-        child {node {latitude}}
-      }
-      child [missing] {}
-      child { node {units}
-        child {node {degrees north}}
-      }
-      child [missing] {}
-    }
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child { node {fld}
-      child { node {shortname}
-        child {node {Sa\_u}}
-      }
-      child [missing] {}
-      child { node {longname}
-        child {node {Zonal wind at the lowest model level}}
-      }
-      child [missing] {}
-      child { node {stdname}
-        child {node {eastward\_wind}}
-      }
-      child [missing] {}
-      child { node {units}
-        child {node {m s-1}}
-      }
-      child [missing] {}
-    }
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child [missing] {}
-    child { node {...}}
-  }
-  };
-\end{tikzpicture}
+\begin{figure}[h]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[height=.5\textheight]{../figures/fields.pdf}
 \caption{fields.xml 结构示意图}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[height=.5\textheight]{../figures/fakeModel.pdf}
+\caption{fakeModel.xml 结构示意图}
+\end{minipage}
 \end{figure}
 
 fakeModel.xml 主要描述了各个特殊数据结构组成的伪模型，这里以海气通量xao为代表，其相关数据结构分为flds\_xao\_states，flds\_xao\_fluxes，flds\_xao\_fields三部分，在attrVect字段中的field字段进行注册，其具体内容在fields.xml中注册并引用。其依赖模式分量atm和ocn在deps字段中记录为atm:ocn，相关变量xao\_ox和xao\_ax分别在variables字段中记录为variable字段，以xao\_ox为例，其name字段记为xao\_ox，grid字段记录为ocn，method字段中对init, run, final三套函数在phase字段中进行注册，init阶段第一个函数name字段为flux\_init\_mct，args字段中注册的四个参数分别为gsmap, domain, mpicom, fraction，均通过ocn模型，因此在arg model='ocn'字段中分别记录。 init阶段第二个函数name字段为flux\_ocnalb\_mct，其参数有两个来源于ocn，在arg model='ocn'字段中分别记录为comp和fraction，另一个参数是该变量自身，直接在arg字段中记录xao\_ox。run和final类似。在xao\_ox和xao\_ax全部注册完毕后该文件的variables字段完成。
-
-\begin{figure}[H]
-\begin{tikzpicture}[%
-  grow via three points={one child at (0.5,-0.7) and
-  two children at (0.5,-0.7) and (0.5,-1.4)},
-  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-
-  \node{fakeModel}
-    child { node {models}
-    	child { node {model type='fake'}
-    		child { node {name}
-    			child {node {xao}}
-    		}
-    		child [missing] {}
-    		child { node {fields}
-    			child {node {flds\_xao\_states,flds\_xao\_fluxes,...}}
-    		}
-    		child [missing] {}
-    		child { node {deps}
-    			child {node {atm:ocn}}
-    		}
-    		child [missing] {}
-    		child { node {variables}
-    			child {node {variable type='attrVect'}
-    				child { node {name}
-    					child {node {xao\_ox}}
-    				}
-		    		child [missing] {}
-    				child { node {grid}
-    					child {node {ocn}}
-    				}
-		    		child [missing] {}
-		    		child { node {method}
-		    			child { node {init}
-		    				child {node {...}}
-		    			}
-		    			child [missing] {}
-		    			child { node {run}
-		    				child {node {...}}
-		    			}
-		    			child [missing] {}
-		    			child { node {final}
-		    				child {node {...}}
-		    			}
-		    			child [missing] {}
-		    		}
-		    		child [missing] {}
-		    		child [missing] {}
-		    		child [missing] {}
-		    		child [missing] {}
-		    		child [missing] {}
-		    		child [missing] {}
-    			}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-    			child {node {variable type='attrVect'}
-    				child { node {name}
-    					child {node {xao\_ax}}
-    				}
-		    		child [missing] {}
-    				child { node {grid}
-    					child {node {atm}}
-    				}
-		    		child [missing] {}
-		    		child { node {...} }
-    			}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-	    		child [missing] {}
-    			child {node {...}}
-    		}
-    	}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child [missing] {}
-   		child { node {...} }
-    };
-\end{tikzpicture}
-\caption{fakeModel.xml 结构示意图}
-\end{figure}
-
 
 \section {代码生成}
 
@@ -542,6 +105,11 @@ oxid_1.9x2.5_L26_clim_list.c090805.txt
 \section {生成实例}
 
 编译后的内部库会与各个模式分量实现的代码一同创建为实验实例，其结构如下图。该实例可以直接编译运行，或对模式分量实现进行嵌入式调试。
+
+\usetikzlibrary{trees}
+\tikzstyle{every node}=[draw=black,thick,anchor=west]
+\tikzstyle{selected}=[draw=red,fill=red!30]
+\tikzstyle{optional}=[dashed,fill=gray!50]
 
 \begin{figure}[H]
 \begin{tikzpicture}[%

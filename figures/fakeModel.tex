@@ -1,0 +1,120 @@
+\documentclass[tikz,border=2pt]{standalone} 
+\begin{document} 
+
+\usetikzlibrary{trees}
+\tikzstyle{every node}=[draw=black,thick,anchor=west]
+\tikzstyle{selected}=[draw=red,fill=red!30]
+\tikzstyle{optional}=[dashed,fill=gray!50]
+
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.5,-0.7) and
+  two children at (0.5,-0.7) and (0.5,-1.4)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+
+  \node{fakeModel}
+    child { node {models}
+    	child { node {model type='fake'}
+    		child { node {name}
+    			child {node {xao}}
+    		}
+    		child [missing] {}
+    		child { node {fields}
+    			child {node {flds\_xao\_states,flds\_xao\_fluxes,...}}
+    		}
+    		child [missing] {}
+    		child { node {deps}
+    			child {node {atm:ocn}}
+    		}
+    		child [missing] {}
+    		child { node {variables}
+    			child {node {variable type='attrVect'}
+    				child { node {name}
+    					child {node {xao\_ox}}
+    				}
+		    		child [missing] {}
+    				child { node {grid}
+    					child {node {ocn}}
+    				}
+		    		child [missing] {}
+		    		child { node {method}
+		    			child { node {init}
+		    				child {node {...}}
+		    			}
+		    			child [missing] {}
+		    			child { node {run}
+		    				child {node {...}}
+		    			}
+		    			child [missing] {}
+		    			child { node {final}
+		    				child {node {...}}
+		    			}
+		    			child [missing] {}
+		    		}
+		    		child [missing] {}
+		    		child [missing] {}
+		    		child [missing] {}
+		    		child [missing] {}
+		    		child [missing] {}
+		    		child [missing] {}
+    			}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+    			child {node {variable type='attrVect'}
+    				child { node {name}
+    					child {node {xao\_ax}}
+    				}
+		    		child [missing] {}
+    				child { node {grid}
+    					child {node {atm}}
+    				}
+		    		child [missing] {}
+		    		child { node {...} }
+    			}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+	    		child [missing] {}
+    			child {node {...}}
+    		}
+    	}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child [missing] {}
+   		child { node {...} }
+    };
+\end{tikzpicture}
+
+\end{document}
